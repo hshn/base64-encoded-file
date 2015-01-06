@@ -8,5 +8,18 @@
             "email": "lga0503@gmail.com"
         }
     ],
-    "require": {}
+    "require": {
+        "symfony/http-foundation": "~2.4"
+    },
+    "autoload": {
+        "psr-4": { "Hshn\\": "src" }
+    },
+    "autoload-dev": {
+        "psr-4": { "Hshn\\": "tests" }
+    },
+    "extra": {
+        "branch-alias": {
+            "dev-master": "1.x-dev"
+        }
+    }
 }
