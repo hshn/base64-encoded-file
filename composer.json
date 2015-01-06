@@ -1,0 +1,12 @@
+{
+    "name": "hshn/form-base64-encoded-file",
+    "description": "Provides handling base64 encoded files, and the integration of symfony/form",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Shota Hoshino",
+            "email": "lga0503@gmail.com"
+        }
+    ],
+    "require": {}
+}
