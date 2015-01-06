@@ -1,5 +1,5 @@
 {
-    "name": "hshn/form-base64-encoded-file",
+    "name": "hshn/base64-encoded-file",
     "description": "Provides handling base64 encoded files, and the integration of symfony/form",
     "license": "MIT",
     "authors": [
