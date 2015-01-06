@@ -1,6 +1,6 @@
 <?php
 
-namespace Hshn\HttpFoundation\File;
+namespace Hshn\Base64EncodedFile\HttpFoundation\File;
 
 /**
  * @author Shota Hoshino <lga0503@gmail.com>

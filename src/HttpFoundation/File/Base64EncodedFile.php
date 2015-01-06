@@ -1,6 +1,6 @@
 <?php
 
-namespace Hshn\HttpFoundation\File;
+namespace Hshn\Base64EncodedFile\HttpFoundation\File;
 
 use Symfony\Component\HttpFoundation\File\Exception\FileException;
 use Symfony\Component\HttpFoundation\File\File;

@@ -13,10 +13,10 @@
         "symfony/http-foundation": "~2.4"
     },
     "autoload": {
-        "psr-4": { "Hshn\\": "src" }
+        "psr-4": { "Hshn\\Base64EncodedFile\\": "src" }
     },
     "autoload-dev": {
-        "psr-4": { "Hshn\\": "tests" }
+        "psr-4": { "Hshn\\Base64EncodedFile\\": "tests" }
     },
     "extra": {
         "branch-alias": {
