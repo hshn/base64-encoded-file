@@ -15,6 +15,9 @@
     "require-dev": {
         "symfony/form": "~2.4"
     },
+    "suggests": {
+        "symfony/form": "to use base64_encoded_file type"
+    },
     "autoload": {
         "psr-4": { "Hshn\\Base64EncodedFile\\": "src" }
     },
