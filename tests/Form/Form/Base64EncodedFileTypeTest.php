@@ -28,7 +28,7 @@ class Base64EncodedFileTypeTest extends TypeTestCase
 
         /** @var $file File */
         $file = $form->getData();
-        $this->assertInstanceOf('Hshn\Base64EncodedFile\HttpFoundation\File\Base64EncodedFile', $file);
+        $this->assertInstanceOf('Hshn\Base64EncodedFile\HttpFoundation\File\UploadedBase64EncodedFile', $file);
 
         $this->assertEquals($expectedMimeType, $file->getMimeType());
     }

@@ -2,7 +2,7 @@
 
 namespace Hshn\Base64EncodedFile\Form\DataTransformer;
 
-use Hshn\Base64EncodedFile\HttpFoundation\File\Base64EncodedFile;
+use Hshn\Base64EncodedFile\HttpFoundation\File\UploadedBase64EncodedFile;
 use Symfony\Component\Form\DataTransformerInterface;
 
 /**
@@ -80,8 +80,8 @@ class FileToBase64EncodedStringTransformerTest extends \PHPUnit_Framework_TestCa
             [null, null],
             [null, ''],
             [$this->callback(function ($value) {
-                /** @var $value Base64EncodedFile */
-                $this->assertInstanceOf('Hshn\Base64EncodedFile\HttpFoundation\File\Base64EncodedFile', $value);
+                /** @var $value UploadedBase64EncodedFile */
+                $this->assertInstanceOf('Hshn\Base64EncodedFile\HttpFoundation\File\UploadedBase64EncodedFile', $value);
                 $this->assertEquals('foo bar', file_get_contents($value->getPathname()));
 
                 return true;

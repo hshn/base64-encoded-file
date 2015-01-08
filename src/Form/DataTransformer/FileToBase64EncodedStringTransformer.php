@@ -3,6 +3,7 @@
 namespace Hshn\Base64EncodedFile\Form\DataTransformer;
 
 use Hshn\Base64EncodedFile\HttpFoundation\File\Base64EncodedFile;
+use Hshn\Base64EncodedFile\HttpFoundation\File\UploadedBase64EncodedFile;
 use Symfony\Component\Form\DataTransformerInterface;
 use Symfony\Component\Form\Exception\TransformationFailedException;
 
@@ -51,7 +52,7 @@ class FileToBase64EncodedStringTransformer implements DataTransformerInterface
         }
 
         try {
-            return new Base64EncodedFile($value, $this->strict);
+            return new UploadedBase64EncodedFile(new Base64EncodedFile($value, $this->strict));
         } catch (\Exception $e) {
             throw new TransformationFailedException($e->getMessage(), $e->getCode(), $e);
         }
