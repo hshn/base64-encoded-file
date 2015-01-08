@@ -1,2 +1,6 @@
-# base64-encoded-file
-Provides handling base64 encoded files, and the integration of symfony/form
+base64-encoded-file
+===================
+
+Provides handling for base64 encoded files
+
+[![Build Status](https://travis-ci.org/hshn/base64-encoded-file.svg?branch=master)](https://travis-ci.org/hshn/base64-encoded-file)
