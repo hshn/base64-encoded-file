@@ -30,7 +30,7 @@ class Base64EncodedFileType extends AbstractType
         $resolver
             ->setDefaults([
                 'compound' => false,
-                'data_class' => 'Symfony\Component\HttpFoundation\File\File',
+                'data_class' => null,
                 'empty_data' => null,
                 'multiple' => false,
             ])
