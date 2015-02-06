@@ -36,7 +36,7 @@ class FileToBase64EncodedStringTransformer implements DataTransformerInterface
         }
 
         if (false === $file = @file_get_contents($value->getPathname(), FILE_BINARY)) {
-            throw new TransformationFailedException(sprintf('Could not read the "%s" file', $value->getPathname()));
+            throw new TransformationFailedException(sprintf('Unable to read the "%s" file', $value->getPathname()));
         }
 
         return base64_encode($file);
