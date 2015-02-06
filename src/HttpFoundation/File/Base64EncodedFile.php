@@ -30,15 +30,15 @@ class Base64EncodedFile extends File
     private function restoreToTemporary($encoded, $strict = true)
     {
         if (false === $decoded = base64_decode($encoded, $strict)) {
-            throw new FileException('Could not decode strings as base64');
+            throw new FileException('Unable to decode strings as base64');
         }
 
         if (false === $path = tempnam($directory = sys_get_temp_dir(), 'Base64EncodedFile')) {
-            throw new FileException(sprintf('Could not create a file into the "%s" directory', $directory));
+            throw new FileException(sprintf('Unable to create a file into the "%s" directory', $directory));
         }
 
         if (false === file_put_contents($path, $decoded, FILE_BINARY)) {
-            throw new FileException(sprintf('Could not write the file "%s"', $path));
+            throw new FileException(sprintf('Unable to write the file "%s"', $path));
         }
 
         return $path;
