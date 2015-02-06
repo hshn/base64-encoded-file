@@ -15,7 +15,7 @@
     "require-dev": {
         "symfony/form": "~2.4"
     },
-    "suggests": {
+    "suggest": {
         "symfony/form": "to use base64_encoded_file type"
     },
     "autoload": {
