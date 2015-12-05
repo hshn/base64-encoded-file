@@ -14,4 +14,4 @@ before_script:
   - npm install
   - composer install --dev --prefer-source
 
-script: gulp test
+script: npm test
