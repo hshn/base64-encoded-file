@@ -68,6 +68,14 @@ class Base64EncodedFileTypeTest extends TypeTestCase
      */
     private function createForm()
     {
-        return $this->factory->create(new Base64EncodedFileType());
+        $type = new Base64EncodedFileType();
+
+        $name = $type->getParent() === 'text'
+            // sf < 2.7
+            ? $type
+            // sf > 2.8
+            : 'Hshn\Base64EncodedFile\Form\Type\Base64EncodedFileType';
+
+        return $this->factory->create($name);
     }
 }

@@ -7,6 +7,7 @@ use Hshn\Base64EncodedFile\Form\DataTransformer\FileToBase64EncodedStringTransfo
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
 
 /**
@@ -35,7 +36,7 @@ class Base64EncodedFileType extends AbstractType
                 'multiple' => false,
                 'strict_decode' => true,
             ])
-            ->setAllowedTypes('strict_decode', 'boolean')
+            ->setAllowedTypes('strict_decode', 'bool')
         ;
     }
 
@@ -44,14 +45,40 @@ class Base64EncodedFileType extends AbstractType
      */
     public function getParent()
     {
-        return 'text';
+        if ('form' === parent::getParent()) {
+            // BC for SF < 2.8
+            return 'text';
+        }
+
+        return 'Symfony\Component\Form\Extension\Core\Type\TextType';
     }
 
     /**
      * {@inheritdoc}
      */
-    public function getName()
+    public function getBlockPrefix()
     {
         return 'file_base64_encoded';
+    }
+
+    /**
+     * BC for SF < 2.7
+     *
+     * @param \Symfony\Component\OptionsResolver\OptionsResolverInterface $resolver
+     */
+    public function setDefaultOptions(OptionsResolverInterface $resolver)
+    {
+        /* @var $resolver OptionsResolver */
+        $this->configureOptions($resolver);
+    }
+
+    /**
+     * BC for SF < 3.0
+     *
+     * {@inheritdoc}
+     */
+    public function getName()
+    {
+        return $this->getBlockPrefix();
     }
 }
