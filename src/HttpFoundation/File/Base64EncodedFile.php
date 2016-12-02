@@ -29,7 +29,7 @@ class Base64EncodedFile extends File
      */
     private function restoreToTemporary($encoded, $strict = true)
     {
-        if (false === $decoded = file_get_contents("data://{$encoded}")) {
+        if ((false === $decoded = @file_get_contents("data://{$encoded}")) && (false === $decoded = @base64_decode($encoded))) {
             throw new FileException('Unable to decode strings as base64');
         }
 
