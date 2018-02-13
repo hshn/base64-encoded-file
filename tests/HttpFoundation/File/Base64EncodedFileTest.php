@@ -2,10 +2,12 @@
 
 namespace Hshn\Base64EncodedFile\HttpFoundation\File;
 
+use PHPUnit\Framework\TestCase;
+
 /**
  * @author Shota Hoshino <lga0503@gmail.com>
  */
-class Base64EncodedFileTest extends \PHPUnit_Framework_TestCase
+class Base64EncodedFileTest extends TestCase
 {
     /**
      * @test

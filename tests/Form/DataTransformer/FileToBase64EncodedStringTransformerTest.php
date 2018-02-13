@@ -3,12 +3,14 @@
 namespace Hshn\Base64EncodedFile\Form\DataTransformer;
 
 use Hshn\Base64EncodedFile\HttpFoundation\File\UploadedBase64EncodedFile;
+use PHPUnit\Framework\Constraint\Constraint;
+use PHPUnit\Framework\TestCase;
 use Symfony\Component\Form\DataTransformerInterface;
 
 /**
  * @author Shota Hoshino <lga0503@gmail.com>
  */
-class FileToBase64EncodedStringTransformerTest extends \PHPUnit_Framework_TestCase
+class FileToBase64EncodedStringTransformerTest extends TestCase
 {
     /**
      * @var DataTransformerInterface
@@ -29,7 +31,7 @@ class FileToBase64EncodedStringTransformerTest extends \PHPUnit_Framework_TestCa
      */
     public function testTransform($expectedTransformedValue, $value)
     {
-        $this->assertEquals($expectedTransformedValue, $this->transformer->transform($value));
+        self::assertEquals($expectedTransformedValue, $this->transformer->transform($value));
     }
 
     /**
@@ -62,13 +64,9 @@ class FileToBase64EncodedStringTransformerTest extends \PHPUnit_Framework_TestCa
      * @param $expectedConstraint
      * @param $value
      */
-    public function testReverseTransform($expectedConstraint, $value)
+    public function testReverseTransform(Constraint $expectedConstraint, $value)
     {
-        if (! $expectedConstraint instanceof \PHPUnit_Framework_Constraint) {
-            $expectedConstraint = $this->equalTo($expectedConstraint);
-        }
-
-        $this->assertThat($this->transformer->reverseTransform($value), $expectedConstraint);
+        self::assertThat($this->transformer->reverseTransform($value), $expectedConstraint);
     }
 
     /**
@@ -77,12 +75,12 @@ class FileToBase64EncodedStringTransformerTest extends \PHPUnit_Framework_TestCa
     public function provideReverseTransformEmptyTests()
     {
         return [
-            [null, null],
-            [null, ''],
-            [$this->callback(function ($value) {
+            [self::isNull(), null],
+            [self::isNull(), ''],
+            [self::callback(function ($value) {
                 /** @var $value UploadedBase64EncodedFile */
-                $this->assertInstanceOf('Hshn\Base64EncodedFile\HttpFoundation\File\UploadedBase64EncodedFile', $value);
-                $this->assertEquals('foo bar', file_get_contents($value->getPathname()));
+                self::assertInstanceOf(UploadedBase64EncodedFile::class, $value);
+                self::assertEquals('foo bar', file_get_contents($value->getPathname()));
 
                 return true;
             }), base64_encode('foo bar')],
