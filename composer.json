@@ -10,10 +10,10 @@
     ],
     "require": {
         "PHP": ">=5.4.0",
-        "symfony/http-foundation": "~2.7|~3.0"
+        "symfony/http-foundation": "^3.0.9|^4.0.4"
     },
     "require-dev": {
-        "symfony/form": "~2.7|~3.0"
+        "symfony/form": "^3.0.9|^4.0.4"
     },
     "suggest": {
         "symfony/form": "to use base64_encoded_file type"
