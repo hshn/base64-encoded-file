@@ -9,7 +9,7 @@
         }
     ],
     "require": {
-        "PHP": ">=5.4.0",
+        "PHP": ">=7.0.0",
         "symfony/http-foundation": "^3.0.9|^4.0.4"
     },
     "require-dev": {
