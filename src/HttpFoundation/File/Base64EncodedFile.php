@@ -30,40 +30,59 @@ class Base64EncodedFile extends File
      */
     private function restoreToTemporary($encoded, $strict = true)
     {
-        $fileData = \str_replace('data:', 'data://', $encoded);
+        if (substr($encoded, 0, 5) === 'data:') {
+            if (substr($encoded, 0, 7) !== 'data://') {
+                $encoded = substr_replace($encoded, 'data://', 0, 5);
+            }
 
-        $dataStream = \fopen($fileData, 'r');
-        if ($dataStream === false) {
+            $source = @fopen($encoded, 'r');
+            if ($source === false) {
+                throw new FileException('Unable to decode strings as base64');
+            }
+
+            $meta = stream_get_meta_data($source);
+
+            if ($strict) {
+                if (!isset($meta['base64']) || $meta['base64'] !== true) {
+                    throw new FileException('Unable to decode strings as base64');
+                }
+            }
+
+            if (false === $path = tempnam($directory = sys_get_temp_dir(), 'Base64EncodedFile')) {
+                throw new FileException(sprintf('Unable to create a file into the "%s" directory', $path));
+            }
+
+            if (null !== $extension = (new MimeTypeExtensionGuesser())->guess($meta['mediatype'])) {
+                $path .= '.' . $extension;
+            }
+
+            if (false === $target = @fopen($path, 'w+b')) {
+                throw new FileException(sprintf('Unable to write the file "%s"', $path));
+            }
+
+            if (false === @stream_copy_to_stream($source, $target)) {
+                throw new FileException(sprintf('Unable to write the file "%s"', $path));
+            }
+
+            if (false === @fclose($target)) {
+                throw new FileException(sprintf('Unable to write the file "%s"', $path));
+            }
+
+            return $path;
+        }
+
+        if (false === $decoded = base64_decode($encoded, $strict)) {
             throw new FileException('Unable to decode strings as base64');
         }
 
-        $fileMeta = \stream_get_meta_data($dataStream);
-
-        if ($strict) {
-            if (!isset($fileMeta['base64']) || $fileMeta['base64'] !== true) {
-                throw new FileException('Unable to decode strings as base64');
-            }
+        if (false === $path = tempnam($directory = sys_get_temp_dir(), 'Base64EncodedFile')) {
+            throw new FileException(sprintf('Unable to create a file into the "%s" directory', $directory));
         }
 
-        $fileExtension = (new MimeTypeExtensionGuesser())->guess($fileMeta['mediatype']);
-
-        $filePath = \tempnam($tempDir = \sys_get_temp_dir(), 'Base64EncodedFile');
-        if ($filePath === false) {
-            throw new FileException(\sprintf('Unable to create a file into the "%s" directory', $tempDir));
+        if (false === file_put_contents($path, $decoded, FILE_BINARY)) {
+            throw new FileException(sprintf('Unable to write the file "%s"', $path));
         }
 
-        $filePath .= '.' . $fileExtension;
-
-        $fileStream = \fopen($filePath, 'w+b');
-
-        if (\stream_copy_to_stream($dataStream, $fileStream) === false) {
-            throw new FileException(\sprintf('Unable to write the file "%s"', $filePath));
-        }
-
-        if (\fclose($fileStream) === false) {
-            throw new FileException(\sprintf('Unable to write the file "%s"', $filePath));
-        }
-
-        return $filePath;
+        return $path;
     }
 }
