@@ -68,6 +68,10 @@ class Base64EncodedFile extends File
                 throw new FileException(sprintf('Unable to write the file "%s"', $path));
             }
 
+            if (false === @fclose($source)) {
+                throw new FileException(sprintf('Unable to close data stream'));
+            }
+
             return $path;
         }
 
