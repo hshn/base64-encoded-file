@@ -49,7 +49,7 @@ class Base64EncodedFile extends File
 
         $filePath = \tempnam($tempDir = \sys_get_temp_dir(), 'Base64EncodedFile');
         if ($filePath === false) {
-            throw new FileException(sprintf('Unable to create a file into the "%s" directory', $tempDir));
+            throw new FileException(\sprintf('Unable to create a file into the "%s" directory', $tempDir));
         }
 
         $filePath .= '.' . $fileExtension;
