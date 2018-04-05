@@ -30,7 +30,6 @@ class Base64EncodedFileTest extends TestCase
         $this->assertEquals($rawStrings, file_get_contents($file->getPathname()));
     }
 
-
     /**
      * @test
      */
@@ -41,7 +40,6 @@ class Base64EncodedFileTest extends TestCase
 
         $this->assertFileExists($file->getPathname());
         $this->assertEquals($rawStrings, file_get_contents($file->getPathname()));
-        $this->assertEquals('txt', pathinfo($file->getPathname(),  PATHINFO_EXTENSION));
-
+        $this->assertEquals('txt', pathinfo($file->getPathname(), PATHINFO_EXTENSION));
     }
 }
