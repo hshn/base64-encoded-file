@@ -29,4 +29,17 @@ class Base64EncodedFileTest extends TestCase
         $this->assertFileExists($file->getPathname());
         $this->assertEquals($rawStrings, file_get_contents($file->getPathname()));
     }
+
+    /**
+     * @test
+     */
+    public function testCreateInstanceWithData()
+    {
+        $rawStrings = 'symfony2';
+        $file = new Base64EncodedFile('data:text/plain;base64,' . base64_encode($rawStrings));
+
+        $this->assertFileExists($file->getPathname());
+        $this->assertEquals($rawStrings, file_get_contents($file->getPathname()));
+        $this->assertEquals('txt', pathinfo($file->getPathname(), PATHINFO_EXTENSION));
+    }
 }
