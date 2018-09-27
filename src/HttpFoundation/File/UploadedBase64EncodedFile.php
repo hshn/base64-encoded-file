@@ -12,12 +12,12 @@ class UploadedBase64EncodedFile extends UploadedFile
 {
     /**
      * @param Base64EncodedFile $file
-     * @param string            $originalName
-     * @param null              $mimeType
-     * @param null              $size
+     * @param string $originalName
+     * @param null $mimeType
+     * @param null $size
      */
-    public function __construct(Base64EncodedFile $file, $originalName = '', $mimeType = null, $size = null)
+    public function __construct(Base64EncodedFile $file, $originalName = '', $mimeType = null)
     {
-        parent::__construct($file->getPathname(), $originalName ?: $file->getFilename(), $mimeType, $size, null, true);
+        parent::__construct($file->getPathname(), $originalName ?: $file->getFilename(), $mimeType, null, true);
     }
 }
