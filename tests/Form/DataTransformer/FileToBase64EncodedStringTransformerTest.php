@@ -97,6 +97,15 @@ class FileToBase64EncodedStringTransformerTest extends TestCase
     }
 
     /**
+     * @test
+     * @expectedException \Symfony\Component\Form\Exception\TransformationFailedException
+     */
+    public function testReverseTransformNonString()
+    {
+        $this->transformer->reverseTransform(new \stdClass());
+    }
+
+    /**
      * @param $path
      *
      * @return \PHPUnit_Framework_MockObject_MockObject
