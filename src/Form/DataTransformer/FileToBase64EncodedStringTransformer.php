@@ -51,6 +51,10 @@ class FileToBase64EncodedStringTransformer implements DataTransformerInterface
             return null;
         }
 
+        if (false === is_string($value)) {
+            throw new TransformationFailedException('Expected a Base64 encoded string.');
+        }
+
         try {
             return new UploadedBase64EncodedFile(new Base64EncodedFile($value, $this->strict));
         } catch (\Exception $e) {
