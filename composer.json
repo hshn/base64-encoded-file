@@ -14,10 +14,12 @@
     },
     "require-dev": {
         "symfony/form": "^2.8 || ^3.0 || ^4.0",
+        "symfony/serializer": "^2.8 || ^3.0 || ^4.0",
         "phpunit/phpunit": "^6.5"
     },
     "suggest": {
-        "symfony/form": "to use base64_encoded_file type"
+        "symfony/form": "to use base64_encoded_file type",
+        "symfony/serializer": "to convert a base64 string to a Base64EncodedFile object"
     },
     "autoload": {
         "psr-4": {
