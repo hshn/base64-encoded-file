@@ -15,11 +15,17 @@
     "require-dev": {
         "symfony/form": "^2.8 || ^3.0 || ^4.0",
         "symfony/serializer": "^2.8 || ^3.0 || ^4.0",
-        "phpunit/phpunit": "^6.5"
+        "phpunit/phpunit": "^6.5",
+        "symfony/dependency-injection": "^2.8 || ^3.0 || ^4.0",
+        "symfony/config": "^2.8 || ^3.0 || ^4.0",
+        "symfony/http-kernel": "^2.8 || ^3.0 || ^4.0"
     },
     "suggest": {
         "symfony/form": "to use base64_encoded_file type",
-        "symfony/serializer": "to convert a base64 string to a Base64EncodedFile object"
+        "symfony/serializer": "to convert a base64 string to a Base64EncodedFile object",
+        "symfony/dependency-injection": "to use the bundle in a Symfony project",
+        "symfony/http-kernel": "to use the bundle in a Symfony project",
+        "symfony/config": "to use the bundle in a Symfony project"
     },
     "autoload": {
         "psr-4": {

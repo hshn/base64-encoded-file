@@ -44,3 +44,22 @@ $form = $formBuilder
     ->add('file', Base64EncodedFileType::class)
     ->getForm();
 ```
+
+
+### Integration in a Symfony project (manual install)
+
+Use this bundle in a Symfony project requires the following libraries:
+
+* symfony/dependency-injection
+* symfony/http-kernel
+* symfony/config
+
+Then, you can load the bundle through the following configuration:
+
+```php
+<?php
+
+// bundles.php
+
+Hshn\Base64EncodedFile\Bridge\Symfony\Bundle\Base64EncodedFileBundle::class => ['all' => true],
+```
