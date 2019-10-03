@@ -70,7 +70,7 @@ class FileToBase64EncodedStringTransformerTest extends TestCase
     }
 
     /**
-     * @test
+     * @return array
      */
     public function provideReverseTransformEmptyTests()
     {
