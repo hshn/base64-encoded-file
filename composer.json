@@ -5,7 +5,7 @@
     "authors": [
         {
             "name": "Shota Hoshino",
-            "email": "lga0503@gmail.com"
+            "email": "sht.hshn@gmail.com"
         }
     ],
     "require": {
@@ -26,6 +26,9 @@
         "symfony/dependency-injection": "to use the bundle in a Symfony project",
         "symfony/http-kernel": "to use the bundle in a Symfony project",
         "symfony/config": "to use the bundle in a Symfony project"
+    },
+    "scripts": {
+        "test": "vendor/bin/phpunit -c ."
     },
     "autoload": {
         "psr-4": {
