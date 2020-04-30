@@ -4,6 +4,7 @@ namespace Hshn\Base64EncodedFile\HttpFoundation\File;
 
 use Symfony\Component\HttpFoundation\File\Exception\FileException;
 use Symfony\Component\HttpFoundation\File\File;
+use Symfony\Component\HttpFoundation\File\MimeType\MimeTypeExtensionGuesser;
 use Symfony\Component\Mime\MimeTypes;
 
 /**
@@ -13,8 +14,8 @@ class Base64EncodedFile extends File
 {
     /**
      * @param string $encoded
-     * @param bool   $strict
-     * @param bool   $checkPath
+     * @param bool $strict
+     * @param bool $checkPath
      */
     public function __construct($encoded, $strict = true, $checkPath = true)
     {
@@ -23,26 +24,27 @@ class Base64EncodedFile extends File
 
     /**
      * @param string $encoded
-     * @param bool   $strict
+     * @param bool $strict
      *
+     * @return string
      * @throws FileException
      */
-    private function restoreToTemporary($encoded, $strict = true): string
+    private function restoreToTemporary($encoded, $strict = true)
     {
-        if (0 === strpos($encoded, 'data:')) {
-            if (0 !== strpos($encoded, 'data://')) {
+        if (strpos($encoded, 'data:') === 0) {
+            if (strpos($encoded, 'data://') !== 0) {
                 $encoded = substr_replace($encoded, 'data://', 0, 5);
             }
 
-            $source = @fopen($encoded, 'r');
-            if (false === $source) {
+            $source = @fopen($encoded, 'rb');
+            if ($source === false) {
                 throw new FileException('Unable to decode strings as base64');
             }
 
             $meta = stream_get_meta_data($source);
 
             if ($strict) {
-                if (!isset($meta['base64']) || true !== $meta['base64']) {
+                if (!isset($meta['base64']) || $meta['base64'] !== true) {
                     throw new FileException('Unable to decode strings as base64');
                 }
             }
@@ -51,11 +53,17 @@ class Base64EncodedFile extends File
                 throw new FileException(sprintf('Unable to create a file into the "%s" directory', $path));
             }
 
-            if (null !== $extension = (MimeTypes::getDefault()->getExtensions($meta['mediatype'])[0] ?? null)) {
-                $path .= '.' . $extension;
+            if(class_exists(MimeTypes::class)) {
+                if (null !== $extension = (MimeTypes::getDefault()->getExtensions($meta['mediatype'])[0] ?? null)) {
+                    $path .= '.' . $extension;
+                }
+            } else {
+                if (null !== $extension = (new MimeTypeExtensionGuesser())->guess($meta['mediatype'])) {
+                    $path .= '.' . $extension;
+                }
             }
 
-            if (false === $target = @fopen($path, 'wb+')) {
+            if (false === $target = @fopen($path, 'w+b')) {
                 throw new FileException(sprintf('Unable to write the file "%s"', $path));
             }
 
