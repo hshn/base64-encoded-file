@@ -6,6 +6,7 @@ use Hshn\Base64EncodedFile\HttpFoundation\File\UploadedBase64EncodedFile;
 use PHPUnit\Framework\Constraint\Constraint;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\Form\DataTransformerInterface;
+use Symfony\Component\Form\Exception\TransformationFailedException;
 
 /**
  * @author Shota Hoshino <lga0503@gmail.com>
@@ -17,7 +18,7 @@ class FileToBase64EncodedStringTransformerTest extends TestCase
      */
     private $transformer;
 
-    protected function setUp()
+    protected function setUp(): void
     {
         $this->transformer = new FileToBase64EncodedStringTransformer();
     }
@@ -47,18 +48,14 @@ class FileToBase64EncodedStringTransformerTest extends TestCase
         ];
     }
 
-    /**
-     * @test
-     * @expectedException \Symfony\Component\Form\Exception\TransformationFailedException
-     * @expectedExceptionMessage invalid path
-     */
     public function testTransformInvalidPath()
     {
+        $this->expectException(TransformationFailedException::class);
+        $this->expectExceptionMessage('invalid path');
         $this->transformer->transform($this->getFile('invalid path'));
     }
 
     /**
-     * @test
      * @dataProvider provideReverseTransformEmptyTests
      *
      * @param $expectedConstraint
@@ -87,12 +84,9 @@ class FileToBase64EncodedStringTransformerTest extends TestCase
         ];
     }
 
-    /**
-     * @test
-     * @expectedException \Symfony\Component\Form\Exception\TransformationFailedException
-     */
     public function testReverseTransformInvalidChars()
     {
+        $this->expectException(TransformationFailedException::class);
         $this->transformer->reverseTransform('@');
     }
 
