@@ -17,6 +17,8 @@ matrix:
       env: DEPENDENCY="symfony/lts:^2"
     - php: 7.1
       env: DEPENDENCY="symfony/lts:^3"
+    - php: 7.4
+      env: DEPENDENCY="symfony/symfony:^5"
 
 before_install:
   - composer selfupdate
