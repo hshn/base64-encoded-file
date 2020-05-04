@@ -19,7 +19,7 @@ final class Base64EncodedFileNormalizerTest extends TestCase
      */
     private $normalizer;
 
-    protected function setUp()
+    protected function setUp(): void
     {
         $this->normalizer = new Base64EncodedFileNormalizer();
     }

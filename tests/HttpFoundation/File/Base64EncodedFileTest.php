@@ -3,18 +3,16 @@
 namespace Hshn\Base64EncodedFile\HttpFoundation\File;
 
 use PHPUnit\Framework\TestCase;
+use Symfony\Component\HttpFoundation\File\Exception\FileException;
 
 /**
  * @author Shota Hoshino <lga0503@gmail.com>
  */
 class Base64EncodedFileTest extends TestCase
 {
-    /**
-     * @test
-     * @expectedException \Symfony\Component\HttpFoundation\File\Exception\FileException
-     */
     public function testThrowExceptionUnlessValidChars()
     {
+        $this->expectException(FileException::class);
         new Base64EncodedFile('@');
     }
 

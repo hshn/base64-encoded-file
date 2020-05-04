@@ -5,6 +5,7 @@ namespace Hshn\Base64EncodedFile\HttpFoundation\File;
 use Symfony\Component\HttpFoundation\File\Exception\FileException;
 use Symfony\Component\HttpFoundation\File\File;
 use Symfony\Component\HttpFoundation\File\MimeType\MimeTypeExtensionGuesser;
+use Symfony\Component\Mime\MimeTypes;
 
 /**
  * @author Shota Hoshino <lga0503@gmail.com>
@@ -30,12 +31,12 @@ class Base64EncodedFile extends File
      */
     private function restoreToTemporary($encoded, $strict = true)
     {
-        if (substr($encoded, 0, 5) === 'data:') {
-            if (substr($encoded, 0, 7) !== 'data://') {
+        if (strpos($encoded, 'data:') === 0) {
+            if (strpos($encoded, 'data://') !== 0) {
                 $encoded = substr_replace($encoded, 'data://', 0, 5);
             }
 
-            $source = @fopen($encoded, 'r');
+            $source = @fopen($encoded, 'rb');
             if ($source === false) {
                 throw new FileException('Unable to decode strings as base64');
             }
@@ -52,8 +53,14 @@ class Base64EncodedFile extends File
                 throw new FileException(sprintf('Unable to create a file into the "%s" directory', $path));
             }
 
-            if (null !== $extension = (new MimeTypeExtensionGuesser())->guess($meta['mediatype'])) {
-                $path .= '.' . $extension;
+            if(class_exists(MimeTypes::class)) {
+                if (null !== $extension = (MimeTypes::getDefault()->getExtensions($meta['mediatype'])[0] ?? null)) {
+                    $path .= '.' . $extension;
+                }
+            } else {
+                if (null !== $extension = (new MimeTypeExtensionGuesser())->guess($meta['mediatype'])) {
+                    $path .= '.' . $extension;
+                }
             }
 
             if (false === $target = @fopen($path, 'w+b')) {
