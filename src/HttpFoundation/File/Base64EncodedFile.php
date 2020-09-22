@@ -4,7 +4,6 @@ namespace Hshn\Base64EncodedFile\HttpFoundation\File;
 
 use Symfony\Component\HttpFoundation\File\Exception\FileException;
 use Symfony\Component\HttpFoundation\File\File;
-use Symfony\Component\HttpFoundation\File\MimeType\MimeTypeExtensionGuesser;
 use Symfony\Component\Mime\MimeTypes;
 
 /**
@@ -53,14 +52,8 @@ class Base64EncodedFile extends File
                 throw new FileException(sprintf('Unable to create a file into the "%s" directory', $path));
             }
 
-            if(class_exists(MimeTypes::class)) {
-                if (null !== $extension = (MimeTypes::getDefault()->getExtensions($meta['mediatype'])[0] ?? null)) {
-                    $path .= '.' . $extension;
-                }
-            } else {
-                if (null !== $extension = (new MimeTypeExtensionGuesser())->guess($meta['mediatype'])) {
-                    $path .= '.' . $extension;
-                }
+            if (null !== $extension = ((new MimeTypes())->getExtensions($meta['mediatype'])[0] ?? null)) {
+                $path .= '.' . $extension;
             }
 
             if (false === $target = @fopen($path, 'w+b')) {
