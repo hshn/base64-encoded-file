@@ -15,10 +15,10 @@ matrix:
   include:
     - php: 7.4
       env: DEPENDENCY="symfony/symfony:^5"
-    - php: 7.1
-      env: DEPENDENCY="symfony/lts:^3"
-    - php: 7.1
-      env: DEPENDENCY="symfony/lts:^2"
+    - php: 7.3
+      env: DEPENDENCY="symfony/symfony:^4"
+    - php: 7.3
+      env: DEPENDENCY="symfony/symfony:^3"
 
 before_install:
   - composer selfupdate
