@@ -38,9 +38,6 @@ $file instanceof Symfony\Component\HttpFoundation\File\File; // true
 use Hshn\Base64EncodedFile\Form\Type\Base64EncodedFileType;
 
 $form = $formBuilder
-    // symfony 2.7
-    ->add('file', new Base64EncodedFileType())
-    // symfony 2.8~
     ->add('file', Base64EncodedFileType::class)
     ->getForm();
 ```
