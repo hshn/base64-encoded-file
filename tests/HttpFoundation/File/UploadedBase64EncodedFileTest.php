@@ -73,7 +73,7 @@ class UploadedBase64EncodedFileTest extends TestCase
      *
      * @return UploadedBase64EncodedFile
      */
-    private function getFile($content, $filename = '')
+    private function getFile(string $content, string $filename = ''): UploadedBase64EncodedFile
     {
         return new UploadedBase64EncodedFile(new Base64EncodedFile(base64_encode($content)), $filename);
     }

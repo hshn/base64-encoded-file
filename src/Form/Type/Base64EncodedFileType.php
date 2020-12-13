@@ -43,11 +43,6 @@ class Base64EncodedFileType extends AbstractType
      */
     public function getParent()
     {
-        if ('form' === parent::getParent()) {
-            // BC for SF < 2.8
-            return 'text';
-        }
-
         return 'Symfony\Component\Form\Extension\Core\Type\TextType';
     }
 
@@ -57,15 +52,5 @@ class Base64EncodedFileType extends AbstractType
     public function getBlockPrefix()
     {
         return 'file_base64_encoded';
-    }
-
-    /**
-     * BC for SF < 3.0
-     *
-     * {@inheritdoc}
-     */
-    public function getName()
-    {
-        return $this->getBlockPrefix();
     }
 }
