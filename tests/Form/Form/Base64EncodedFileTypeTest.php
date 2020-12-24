@@ -2,6 +2,7 @@
 
 namespace Hshn\Base64EncodedFile\Form\Type;
 
+use Symfony\Component\Form\FormInterface;
 use Symfony\Component\Form\Test\TypeTestCase;
 use Symfony\Component\HttpFoundation\File\File;
 
@@ -63,19 +64,8 @@ class Base64EncodedFileTypeTest extends TypeTestCase
         $this->assertNull($file);
     }
 
-    /**
-     * @return \Symfony\Component\Form\FormInterface
-     */
-    private function createForm()
+    private function createForm(): FormInterface
     {
-        $type = new Base64EncodedFileType();
-
-        $name = $type->getParent() === 'text'
-            // sf < 2.7
-            ? $type
-            // sf > 2.8
-            : 'Hshn\Base64EncodedFile\Form\Type\Base64EncodedFileType';
-
-        return $this->factory->create($name);
+        return $this->factory->create(Base64EncodedFileType::class);
     }
 }
