@@ -1,0 +1,56 @@
+name: tests
+
+on:
+  push:
+    branches:
+      - master
+  pull_request:
+
+jobs:
+  tests:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        include:
+          - php: 8.0
+          - php: 7.4
+          - php: 7.3
+          - php: 7.4
+            composer-dependencies: symfony/symfony:^5
+          - php: 7.3
+            composer-dependencies: symfony/symfony:^4
+          - php: 7.3
+            composer-dependencies: symfony/symfony:^3
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: "${{ matrix.php }}"
+          tools: composer:v2
+
+      - name: Determine composer cache directory
+        id: composer-cache
+        run: echo "::set-output name=directory::$(composer config cache-dir)"
+
+      - name: Cache composer dependencies
+        uses: actions/cache@v1
+        with:
+          path: ${{ steps.composer-cache.outputs.directory }}
+          key: ${{ runner.os }}-${{ matrix.php }}-composer-${{ hashFiles('**/composer.lock') }}
+          restore-keys: ${{ runner.os }}-${{ matrix.php }}-composer-
+
+      - name: Require additional dependencies
+        run: composer require ${{ matrix.composer-dependencies }} --dev --no-update
+        if: ${{ matrix.composer-dependencies }}
+
+      - name: Install dependencies
+        run: |
+          echo "::group::composer update"
+          composer update --no-progress --no-suggest --ansi --prefer-dist
+          echo "::endgroup::"
+
+      - name: Run tests
+        run: composer run-script test
