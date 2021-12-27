@@ -84,7 +84,7 @@ class Base64EncodedFile extends File
             throw new FileException(sprintf('Unable to create a file into the "%s" directory', $directory));
         }
 
-        if (false === file_put_contents($path, $decoded, FILE_BINARY)) {
+        if (false === file_put_contents($path, $decoded)) {
             throw new FileException(sprintf('Unable to write the file "%s"', $path));
         }
 
