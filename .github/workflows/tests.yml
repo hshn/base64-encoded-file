@@ -12,10 +12,9 @@ jobs:
         include:
           - php: 8.0
           - php: 7.4
-          - php: 7.3
           - php: 7.4
             composer-dependencies: symfony/symfony:^5
-          - php: 7.3
+          - php: 7.4
             composer-dependencies: symfony/symfony:^4
     steps:
       - name: Checkout
