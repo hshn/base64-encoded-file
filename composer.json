@@ -10,16 +10,16 @@
     ],
     "require": {
         "php": "^7.3.0 || ^8.0.0",
-        "symfony/http-foundation": "^3.4.35 || ^4.4.7 || ^5.0.7",
+        "symfony/http-foundation": "^4.4.7 || ^5.0.7",
         "symfony/mime": "^4.3.8 || ^5.0"
     },
     "require-dev": {
-        "symfony/form": "^3.4 || ^4.0 || ^5.0",
-        "symfony/serializer": "^3.4 || ^4.0 || ^5.0",
+        "symfony/form": "^4.0 || ^5.0",
+        "symfony/serializer": "^4.0 || ^5.0",
         "phpunit/phpunit": "^6.5 || ^7.0 || ^8.0",
-        "symfony/dependency-injection": "^3.4 || ^4.0 || ^5.0",
-        "symfony/config": "^3.4 || ^4.0 || ^5.0",
-        "symfony/http-kernel": "^3.4 || ^4.0 || ^5.0"
+        "symfony/dependency-injection": "^4.0 || ^5.0",
+        "symfony/config": "^4.0 || ^5.0",
+        "symfony/http-kernel": "^4.0 || ^5.0"
     },
     "suggest": {
         "symfony/form": "to use base64_encoded_file type",
