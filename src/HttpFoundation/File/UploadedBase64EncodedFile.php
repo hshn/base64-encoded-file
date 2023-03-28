@@ -13,8 +13,8 @@ class UploadedBase64EncodedFile extends UploadedFile
     /**
      * @param Base64EncodedFile $file
      * @param string            $originalName
-     * @param null              $mimeType
-     * @param null              $size
+     * @param string|null       $mimeType
+     * @param int|null          $size
      */
     public function __construct(Base64EncodedFile $file, $originalName = '', $mimeType = null, $size = null)
     {
