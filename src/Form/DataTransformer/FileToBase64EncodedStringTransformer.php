@@ -29,7 +29,7 @@ class FileToBase64EncodedStringTransformer implements DataTransformerInterface
     /**
      * {@inheritdoc}
      */
-    public function transform($value)
+    public function transform(mixed $value): mixed
     {
         if (! $value instanceof \SplFileInfo) {
             return '';
@@ -45,7 +45,7 @@ class FileToBase64EncodedStringTransformer implements DataTransformerInterface
     /**
      * {@inheritdoc}
      */
-    public function reverseTransform($value)
+    public function reverseTransform(mixed $value): mixed
     {
         if (empty($value)) {
             return null;
