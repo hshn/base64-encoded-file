@@ -10,12 +10,21 @@ jobs:
     strategy:
       matrix:
         include:
+          # symfony 7
+          - php: 8.3
           - php: 8.2
+          # symfony 6
+          - php: 8.3
+            composer-dependencies: symfony/symfony:^6
           - php: 8.2
-            composer-dependencies: symfony/symfony:^7
-          - php: 8.1
+            composer-dependencies: symfony/symfony:^6
           - php: 8.1
             composer-dependencies: symfony/symfony:^6
+          # symfony 5
+          - php: 8.3
+            composer-dependencies: symfony/symfony:^5
+          - php: 8.2
+            composer-dependencies: symfony/symfony:^5
           - php: 8.1
             composer-dependencies: symfony/symfony:^5
     steps:
