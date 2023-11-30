@@ -10,13 +10,20 @@ use Symfony\Component\Serializer\Normalizer\DenormalizerInterface;
  */
 final class Base64EncodedFileNormalizer implements DenormalizerInterface
 {
-    public function denormalize($data, $class, $format = null, array $context = array())
+    public function denormalize(mixed $data, string $type, ?string $format = null, array $context = []): mixed
     {
         return new Base64EncodedFile($data);
     }
 
-    public function supportsDenormalization($data, $type, $format = null)
+    public function supportsDenormalization(mixed $data, string $type, string $format = null, array $context = []): bool
     {
         return Base64EncodedFile::class === $type && \is_string($data);
+    }
+
+    public function getSupportedTypes(?string $format): array
+    {
+        return [
+            '*' => true,
+        ];
     }
 }
