@@ -90,4 +90,11 @@ class Base64EncodedFile extends File
 
         return $path;
     }
+
+    public function __destruct()
+    {
+        if (file_exists($this->getPathname())) {
+            unlink($this->getPathname());
+        }
+    }
 }
