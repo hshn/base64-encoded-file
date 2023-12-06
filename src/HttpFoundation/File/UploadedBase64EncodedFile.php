@@ -18,13 +18,10 @@ class UploadedBase64EncodedFile extends UploadedFile
      */
     public function __construct(Base64EncodedFile $file, $originalName = '', $mimeType = null, $size = null)
     {
-        $method = new \ReflectionMethod(parent::class, '__construct');
-        $num = $method->getNumberOfParameters();
-        if (5 === $num) {
-            parent::__construct($file->getPathname(), $originalName ?: $file->getFilename(), $mimeType, null, true);
-        } else {
-            // Symfony 4 compatible
-            parent::__construct($file->getPathname(), $originalName ?: $file->getFilename(), $mimeType, $size, null, true);
+        if ($size !== null) {
+            trigger_error('The $size argument is removed since Symfony 5.0 and we will removed it in 6.0.', E_USER_DEPRECATED);
         }
+
+        parent::__construct($file->getPathname(), $originalName ?: $file->getFilename(), $mimeType, null, true);
     }
 }
