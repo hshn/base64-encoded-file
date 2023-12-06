@@ -10,6 +10,8 @@ use Symfony\Component\HttpFoundation\File\UploadedFile;
  */
 class UploadedBase64EncodedFile extends UploadedFile
 {
+    private Base64EncodedFile $underlying;
+
     /**
      * @param Base64EncodedFile $file
      * @param string            $originalName
@@ -18,10 +20,12 @@ class UploadedBase64EncodedFile extends UploadedFile
      */
     public function __construct(Base64EncodedFile $file, $originalName = '', $mimeType = null, $size = null)
     {
+        parent::__construct($file->getPathname(), $originalName ?: $file->getFilename(), $mimeType, null, true);
+
         if ($size !== null) {
             trigger_error('The $size argument is removed since Symfony 5.0 and we will removed it in 6.0.', E_USER_DEPRECATED);
         }
 
-        parent::__construct($file->getPathname(), $originalName ?: $file->getFilename(), $mimeType, null, true);
+        $this->underlying = $file;
     }
 }
