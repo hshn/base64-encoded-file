@@ -68,6 +68,22 @@ class UploadedBase64EncodedFileTest extends TestCase
     }
 
     /**
+     * @test
+     */
+    public function testCleanupTemporaryFilesOnDestruction()
+    {
+        $file = $this->getFile('symfony');
+
+        $pathname = $file->getPathname();
+
+        $this->assertTrue(file_exists($pathname));
+
+        unset($file);
+
+        $this->assertFalse(file_exists($pathname));
+    }
+
+    /**
      * @param string $content
      * @param string $filename
      *
