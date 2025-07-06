@@ -11,6 +11,7 @@ jobs:
       matrix:
         include:
           # symfony 7
+          - php: 8.4
           - php: 8.3
           - php: 8.2
           # symfony 6
