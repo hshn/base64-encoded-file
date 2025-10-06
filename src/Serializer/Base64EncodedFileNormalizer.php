@@ -15,7 +15,7 @@ final class Base64EncodedFileNormalizer implements DenormalizerInterface
         return new Base64EncodedFile($data);
     }
 
-    public function supportsDenormalization(mixed $data, string $type, string $format = null, array $context = []): bool
+    public function supportsDenormalization(mixed $data, string $type, ?string $format = null, array $context = []): bool
     {
         return Base64EncodedFile::class === $type && \is_string($data);
     }
