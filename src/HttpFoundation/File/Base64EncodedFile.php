@@ -4,7 +4,6 @@ namespace Hshn\Base64EncodedFile\HttpFoundation\File;
 
 use Symfony\Component\HttpFoundation\File\Exception\FileException;
 use Symfony\Component\HttpFoundation\File\File;
-use Symfony\Component\HttpFoundation\File\MimeType\MimeTypeExtensionGuesser;
 use Symfony\Component\Mime\MimeTypes;
 
 /**

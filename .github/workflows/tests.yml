@@ -10,10 +10,15 @@ jobs:
     strategy:
       matrix:
         include:
+          # symfony 8
+          - php: 8.4
           # symfony 7
           - php: 8.4
+            composer-dependencies: symfony/symfony:^7
           - php: 8.3
+            composer-dependencies: symfony/symfony:^7
           - php: 8.2
+            composer-dependencies: symfony/symfony:^7
           # symfony 6
           - php: 8.3
             composer-dependencies: symfony/symfony:^6
