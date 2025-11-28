@@ -2,6 +2,7 @@
 
 namespace Hshn\Base64EncodedFile\Form\Type;
 
+use Hshn\Base64EncodedFile\HttpFoundation\File\UploadedBase64EncodedFile;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\Form\Test\TypeTestCase;
 use Symfony\Component\HttpFoundation\File\File;
@@ -27,9 +28,9 @@ class Base64EncodedFileTypeTest extends TypeTestCase
         $this->assertTrue($form->isSynchronized());
         $this->assertTrue($form->isSubmitted());
 
-        /** @var $file File */
+        /** @var File $file */
         $file = $form->getData();
-        $this->assertInstanceOf('Hshn\Base64EncodedFile\HttpFoundation\File\UploadedBase64EncodedFile', $file);
+        $this->assertInstanceOf(UploadedBase64EncodedFile::class, $file);
 
         $this->assertEquals($expectedMimeType, $file->getMimeType());
     }
@@ -59,7 +60,7 @@ class Base64EncodedFileTypeTest extends TypeTestCase
         $this->assertTrue($form->isSynchronized());
         $this->assertTrue($form->isSubmitted());
 
-        /** @var $file File */
+        /** @var File $file */
         $file = $form->getData();
         $this->assertNull($file);
     }

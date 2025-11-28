@@ -75,8 +75,8 @@ class FileToBase64EncodedStringTransformerTest extends TestCase
             [self::isNull(), null],
             [self::isNull(), ''],
             [self::callback(function ($value) {
-                /** @var $value UploadedBase64EncodedFile */
                 self::assertInstanceOf(UploadedBase64EncodedFile::class, $value);
+                /** @var UploadedBase64EncodedFile $value */
                 self::assertEquals('foo bar', file_get_contents($value->getPathname()));
 
                 return true;
