@@ -2,7 +2,7 @@
 
 Provides handling for base64 encoded files
 
-[![tests](https://github.com/hshn/base64-encoded-file/workflows/tests/badge.svg)](https://github.com/hshn/base64-encoded-file/actions)
+[![tests](https://github.com/hshn/base64-encoded-file/actions/workflows/tests.yml/badge.svg)](https://github.com/hshn/base64-encoded-file/actions/workflows/tests.yml)
 [![Latest Stable Version](https://poser.pugx.org/hshn/base64-encoded-file/v/stable.svg)](https://packagist.org/packages/hshn/base64-encoded-file)
 [![Total Downloads](https://poser.pugx.org/hshn/base64-encoded-file/downloads.svg)](https://packagist.org/packages/hshn/base64-encoded-file)
 [![Latest Unstable Version](https://poser.pugx.org/hshn/base64-encoded-file/v/unstable.svg)](https://packagist.org/packages/hshn/base64-encoded-file)
